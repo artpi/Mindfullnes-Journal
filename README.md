@@ -1,2 +1,2 @@
 # mindfullnes-journal
-test
+test 
