@@ -1,0 +1,3 @@
+[submodule "evernote-sdk-php"]
+	path = evernote-sdk-php
+	url = https://github.com/evernote/evernote-sdk-php.git
