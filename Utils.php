@@ -1,8 +1,10 @@
 <?php
+//I like to hold several helper classes in this file.
 
 
 
 class gOauth {
+    //class to handle Oauth for Google services. 
     private $auth_db_key;
     public $auth_callback = OAUTH_CALLBACK_URL;
     private $db;
@@ -87,6 +89,7 @@ class gOauth {
 
 
 class Picasa extends gOauth {
+    //Class to handle Google+ Photos API. It uses old picasa API, because to this date there is no new API
 
     function __construct() {
         date_default_timezone_set('Europe/Warsaw');
@@ -115,6 +118,7 @@ class Picasa extends gOauth {
 
 
 class Calendar extends gOauth {
+    //Class to handle google calendar
 
     function __construct() {
         date_default_timezone_set('Europe/Warsaw');

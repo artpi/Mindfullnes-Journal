@@ -1,4 +1,5 @@
 <?php
+//Class to handle Misfit shine updates
 
 date_default_timezone_set('Europe/Warsaw');
 
@@ -87,8 +88,9 @@ Class Misfit {
 
 }
 
-include('../Utils.php');
-include('../evernote/artpi_Evernote.php');
+include('config.php');
+include('Utils.php');
+include('evernoteAPI.php');
 $j = new Journal();
 
 
@@ -98,7 +100,7 @@ function updateJournal($date, $data) {
 }
 
 $payload = file_get_contents("php://input");
-$m = new Misfit("fFvH6uyWIW9WoSAvSBil4EtOhsNA090YpFv9AkgFOUrrM0JzrzD3mspsER074VJ23HmRGiuNSLUCrddgZXKAbK1a12cwHxN4kDyTDphXD8Dt25zYeakjv81zoFAW5V5LdxrhQkTYXRlijv69XAUmpyIfCx0QNqFUY1rKms4nBiuRNpAwwEnZYLluLaLUYZZYHx8Pbgcbu2gWI7aRHYu4pE4aoHrZAHPiGcJDMszVRSiKLblogimI3uw6TXchj6q");
+$m = new Misfit(MISFIT_TOKEN);
 $m->endPoint($payload);
 
 

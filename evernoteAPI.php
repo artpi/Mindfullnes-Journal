@@ -1,4 +1,6 @@
 <?php
+
+//Several wrappers for Evernote API
 set_include_path(get_include_path() . PATH_SEPARATOR . EVERNOTE_API_PATH);
 
 
@@ -158,7 +160,7 @@ class Journal extends artpi_Evernote {
     }
 
     function insertQuote() {
-        $n = $this->getNotesByTag('00be54ac-cbaa-47a1-ae10-a547af8441ec', 1000);
+        $n = $this->getNotesByTag(EVERNOTE_QUOTE_TAG, 1000);
         $index = rand(0,count($n)-1);
         $cytat = trim(strip_tags($this->client->getNoteStore()->getNoteContent($n[$index]->guid)));
         $this->replace("[CYTAT]", $cytat);
