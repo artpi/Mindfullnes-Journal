@@ -148,11 +148,8 @@ class Journal extends artpi_Evernote {
         $this->note->content = $this->client->getNoteStore()->getNoteContent($this->note->guid);
         $this->note->tagGuids[] = $this->newNoteTag;
         $this->note->title = "Journal ".$day;
-
         $this->insertQuote();
-
         $this->insertCalendar(date('Y-m-d'));
-
         $this->insertTodo();
 
         //echo $this->note->content;
@@ -170,13 +167,13 @@ class Journal extends artpi_Evernote {
         $events = $this->calendar->getMultipleCalendars($this->googleCalendars, $day, $day);
         $out="";
         foreach ($events as $key => $event) {
-            $out.="<li><en-todo/><a href='".$event['htmlLink']."'>".date("H:i", strtotime($event['start']['dateTime']))." ".$event['summary']."</a></li>\n";
+            $out.="<li><en-todo></en-todo><a href='".$event['htmlLink']."'>".date("H:i", strtotime($event['start']['dateTime']))." ".$event['summary']."</a></li>\n";
         }
 
         if(strlen($out) > 3) {
-            $out .= "<li><en-todo/></li>
+            $out .= "<li><en-todo></en-todo></li>
 </ol>";
-            $this->replace("<li><en-todo/></li>
+            $this->replace("<li><en-todo></en-todo></li>
 </ol>", $out);
         }
 
@@ -188,13 +185,13 @@ class Journal extends artpi_Evernote {
         $n = $this->getNotesByTag($this->todoTag, 100);
         for ($i=0; $i < count($n); $i++) { 
             $value = $n[$i];
-            $out.="<li><en-todo/>".$this->getNoteLink($value)."</li>";
+            $out.="<li><en-todo></en-todo>".$this->getNoteLink($value)."</li>";
         }
 
         if(strlen($out) > 3) {
-            $out .= "<li><en-todo/></li>
+            $out .= "<li><en-todo></en-todo></li>
 </ol>";
-            $this->replace("<li><en-todo/></li>
+            $this->replace("<li><en-todo></en-todo></li>
 </ol>", $out);
         }
     }
