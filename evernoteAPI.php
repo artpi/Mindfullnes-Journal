@@ -152,7 +152,7 @@ class Journal extends artpi_Evernote {
         $this->insertCalendar(date('Y-m-d'));
         $this->insertTodo();
 
-        //echo $this->note->content;
+        // echo $this->note->content;
         $this->updateNote();
     }
 
@@ -171,9 +171,11 @@ class Journal extends artpi_Evernote {
         }
 
         if(strlen($out) > 3) {
-            $out .= "<li><en-todo></en-todo></li>
+            $out .= "<li><en-todo/></li>
 </ol>";
             $this->replace("<li><en-todo></en-todo></li>
+</ol>", $out);
+            $this->replace("<li><en-todo/></li>
 </ol>", $out);
         }
 
@@ -182,16 +184,27 @@ class Journal extends artpi_Evernote {
 
     function insertTodo() {
         $out="";
+
+        //Adding note to review:
+        $n = $this->getNotesByTag(EVERNOTE_REVIEW_TAG, 1000);
+        if (count($n) > 0) {
+            $index = rand(0,count($n)-1);
+            $out.="<li><en-todo/>Review: ".$this->getNoteLink($n[$index])."</li>";            
+        }
+        // print_r($out);
+
         $n = $this->getNotesByTag($this->todoTag, 100);
         for ($i=0; $i < count($n); $i++) { 
             $value = $n[$i];
-            $out.="<li><en-todo></en-todo>".$this->getNoteLink($value)."</li>";
+            $out.="<li><en-todo/>".$this->getNoteLink($value)."</li>";
         }
 
         if(strlen($out) > 3) {
-            $out .= "<li><en-todo></en-todo></li>
+            $out .= "<li><en-todo/></li>
 </ol>";
             $this->replace("<li><en-todo></en-todo></li>
+</ol>", $out);
+            $this->replace("<li><en-todo/></li>
 </ol>", $out);
         }
     }
