@@ -85,6 +85,14 @@ class artpi_Evernote {
         return $n->notes;
     }
 
+    function getNotesByNotebook($notebookGuid, $count) {
+        $this->init();
+        $filter = new \EDAM\NoteStore\NoteFilter();
+        $filter->notebookGuid = $notebookGuid;
+        $n = $this->client->getNoteStore()->findNotes($filter, 0, $count);
+        return $n->notes;
+    }
+
     function getNoteLink($note) {
         $this->init();
         $user = $this->client->getUserStore()->getUser();
