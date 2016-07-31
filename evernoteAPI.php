@@ -61,6 +61,33 @@ class artpi_Evernote {
 
     }
 
+    function newNote( $title, $body, $notebook = null ) {
+
+        $nBody = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+        $nBody .= "<!DOCTYPE en-note SYSTEM \"http://xml.evernote.com/pub/enml2.dtd\">";
+        $nBody .= "<en-note style='background-color:e5ebee'>";
+        $nBody .= $body;
+        $nBody .= "</en-note>";
+
+
+        $ourNote = new \EDAM\Types\Note();
+        $ourNote->content = $nBody;
+        $ourNote->title = $title;
+
+        if( $notebook !== null ) {
+            $ourNote->notebookGuid = $notebook;  
+        }
+
+        //Attempt to create note in Evernote account
+        try {
+            $note = $this->client->getNoteStore()->createNote($ourNote);
+        } catch (EDAMUserException $edue) {
+            print "EDAMUserException[".$edue->errorCode."]: " . $edue;
+        } catch (EDAMNotFoundException $ednfe) {
+            print "EDAMNotFoundException: Invalid parent notebook GUID";
+        }
+    }
+
     function appendMedia($note, $url, $attr="") {
         $image = file_get_contents($url);
         $hash = md5($image,1);
