@@ -1,3 +1,8 @@
+# [Headstart Journal](http://headstart.artpi.net/) 🚀 📖
+
+I am currently working on mobile (iOS & Android) version of this project, written in React Native.
+Check out [Headstart Journal](http://headstart.artpi.net/) if you are interested.
+
 # Mindfullnes-Journal
 
 This project is inspired by **"5-minute Journal"** ( http://amzn.to/1A62uSa ). Beautiful, very well designed paper journal that uses positive psychology hacks and tricks to force you into beeing a positive, happy and effective individual.
